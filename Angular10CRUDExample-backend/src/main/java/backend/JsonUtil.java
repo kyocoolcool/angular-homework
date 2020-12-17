@@ -5,8 +5,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -15,10 +13,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@SpringBootTest
-class BackendApplicationTests {
-    @Test
-    public void writeJson() throws IOException {
+public class JsonUtil {
+    public static void writeJson() throws IOException {
         JSONObject productObject = new JSONObject();
         productObject.put("id", 1);
         productObject.put("name", "Java book");
@@ -27,7 +23,7 @@ class BackendApplicationTests {
         JSONArray productList = new JSONArray();
         productList.add(productObject);
         //Write JSON file
-        try (FileWriter file = new FileWriter("products.json")) {
+        try (FileWriter file = new FileWriter("products2.json")) {
             file.write(productList.toJSONString());
             file.flush();
         } catch (IOException e) {
@@ -35,16 +31,16 @@ class BackendApplicationTests {
         }
     }
 
-    @Test
-    public void readJson() throws IOException, ParseException {
+    public static List<Product> readJson() throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader("products.json")) {
+        try (FileReader reader = new FileReader("products3.json")) {
             Object obj = jsonParser.parse(reader);
             JSONArray productList = (JSONArray) obj;
             System.out.println(productList);
             List<Product> list = new ArrayList<Product>();
             productList.forEach(product ->list.add(parseProductObject((JSONObject) product)));
             System.out.println(list);
+            return list;
         }
     }
 

@@ -1,42 +1,42 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {Product} from '../model/product.model';
 
-const baseURL = 'http://localhost:8080/api/products';
+const baseURL = '/api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   readAll(): Observable<any> {
-    return this.httpClient.get(baseURL);
+    return this.httpClient.get(`${baseURL}/products`);
   }
 
   read(id: number): Observable<any> {
-    return this.httpClient.get(`${baseURL}/${id}`);
+    return this.httpClient.get(`${baseURL}/products/${id}`);
   }
 
   create(data: Product): Observable<any> {
-    return this.httpClient.post(baseURL, data);
+    return this.httpClient.post(`${baseURL}/products`, data);
   }
 
   update(id: number, data: Product): Observable<any> {
-    return this.httpClient.put(`${baseURL}/${id}`, data);
+    return this.httpClient.put(`${baseURL}/product/${id}`, data);
   }
 
   delete(id: number): Observable<any> {
-    return this.httpClient.delete(`${baseURL}/${id}`);
+    return this.httpClient.delete(`${baseURL}/product/${id}`);
   }
 
   deleteAll(): Observable<any> {
-    return this.httpClient.delete(baseURL);
+    return this.httpClient.delete(`${baseURL}/products`);
   }
 
   searchByName(name: string): Observable<any> {
-    return this.httpClient.get(`${baseURL}?name=${name}`);
+    return this.httpClient.get(`${baseURL}/product?name=${name}`);
   }
 }

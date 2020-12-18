@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/services/product.service';
+import {Component, OnInit} from '@angular/core';
+import {ProductService} from 'src/app/services/product.service';
 import {Product} from '../../model/product.model';
 
 @Component({
@@ -9,12 +9,14 @@ import {Product} from '../../model/product.model';
 })
 export class ProductListComponent implements OnInit {
 
-  products: any;
+  // @ts-ignore
+  products: Product[];
   currentProduct: Product | undefined;
   currentIndex = -1;
   name = '';
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService) {
+  }
 
   ngOnInit(): void {
     this.readProducts();
@@ -48,11 +50,13 @@ export class ProductListComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.readProducts();
         },
         error => {
           console.log(error);
-        });
+        }
+      ).add(() => {
+      this.readProducts();
+    });
   }
 
   searchByName(): void {

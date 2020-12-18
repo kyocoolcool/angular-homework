@@ -1,0 +1,7 @@
+{
+  "/api/*": {
+    "target": "http://localhost:8080/Angular10CRUDExample-backend",
+    "secure": false,
+    "loglevel": "debug"
+  }
+}

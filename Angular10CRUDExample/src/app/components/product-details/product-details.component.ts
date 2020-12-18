@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/services/product.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ProductService} from 'src/app/services/product.service';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Product} from '../../model/product.model';
 
 @Component({
@@ -9,7 +9,7 @@ import {Product} from '../../model/product.model';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  public  = null;
+  public = null;
   message = '';
   // @ts-ignore
   currentProduct: Product;
@@ -18,7 +18,8 @@ export class ProductDetailsComponent implements OnInit {
     private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router,
-    ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.message = '';
@@ -29,7 +30,7 @@ export class ProductDetailsComponent implements OnInit {
     this.productService.read(id)
       .subscribe(
         product => {
-          this.currentProduct = product;
+          this.currentProduct = product[0];
           console.log(product);
         },
         error => {
@@ -38,7 +39,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   setAvailableStatus(status: boolean): void {
-    // @ts-ignore
+    this.currentProduct.available = status;
     this.productService.update(this.currentProduct.id, this.currentProduct)
       .subscribe(
         response => {

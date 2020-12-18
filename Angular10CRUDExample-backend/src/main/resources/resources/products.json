@@ -1,0 +1,4 @@
+[{"name":"java book","available":true,"description":"good product","id":1},
+  {"name":"python book","available":true,"description":"nice product","id":2},
+  {"name":"golang book","available":false,"description":"not bad","id":3}
+]

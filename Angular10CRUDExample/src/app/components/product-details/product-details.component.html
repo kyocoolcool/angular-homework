@@ -24,8 +24,7 @@
       </div>
 
       <div class="form-group">
-        <label><strong>Status:</strong></label>
-
+        <label for="available"><strong id="available">Status:{{currentProduct.available}}</strong></label>
       </div>
     </form>
 
@@ -59,7 +58,8 @@
   </div>
 
   <div *ngIf="!currentProduct">
-    <br />
+    <br/>
     <p>This product is not accessible</p>
   </div>
+  <p>{{message}}</p>
 </div>
